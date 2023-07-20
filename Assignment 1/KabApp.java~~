@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class KabApp {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    //Title
+    System.out.println("===============");
+    System.out.printf("|%13s|\n","KAB APP");
+    System.out.println("===============");
+    //Informations on Kab car
+    System.out.println(" 1 - Kab car ");
+    
+    //Information on Kab food
+    System.out.println(" 2 - Kab food ");
+    //Information on Info & history
+    System.out.println(" 3 - Info & History ");
+    //Info on exit
+    System.out.println(" 3 - Exit ");
+    //options
+    System.out.println(" Your option: ");
+    
+    
+    
+    
+    
+  }
+}

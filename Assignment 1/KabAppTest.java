@@ -1,0 +1,195 @@
+import java.util.Scanner;
+public class KabAppTest {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int num;
+    int points = 0;
+    boolean exit = true;
+    //Title
+    do {
+      System.out.println("===============");
+      System.out.printf("|%10s%4s\n","KAB APP","|");
+      System.out.println("===============");
+      System.out.println(" 1 - Kab car ");
+      System.out.println(" 2 - Kab food ");  
+      System.out.println(" 3 - Info & History ");
+      System.out.println(" 4 - Exit ");
+      System.out.println(" Your option: ");
+      num = input.nextInt(); 
+      switch (num) {
+        
+        
+        //Kab car
+        case 1:
+          System.out.println("===============");
+          System.out.printf("|%10s%4s\n","KAB CAR","|");
+          System.out.println("===============");
+          double distance,toll,total;
+          String carHistory;
+          double tripCost = 0;
+          double kabDiscount = 0;
+          char answer;
+          //Enter value for distance
+          System.out.println(" Enter distance(km): ");
+          distance = input.nextDouble();
+          //Enter value for toll
+          System.out.println(" Enter toll(rm): ");
+          toll = input.nextDouble();
+          //make if statement for value if negative program should be invalid
+          if(distance <0 || toll <0){
+            System.out.println("Invalid!");
+            break;
+          }
+          //making a yes or no statement for carPoints
+          else{ System.out.printf(" Have %3d Kab points.Use it?(Y/N): ",points);
+            input.nextLine();
+            answer = input.nextLine().charAt(0);
+            
+            //Make a if else statement for distance less than 5 km= 5 rm and more than 5km use formula
+            
+            if (distance <=5) { 
+              tripCost = 5;
+            }
+            
+            //formula for if distance is more than 5
+            else if( distance >5){  
+              tripCost = 6*(Math.sqrt(0.5*distance-2))+5 ;
+            }
+            //if the user choose yes for discount
+            if (answer == 'y') {
+              kabDiscount = (int)(points /100) *5;
+              points = 0;
+              //print tripcost and toll
+              System.out.printf("\n%-10s:%10.2f","Trip cost", tripCost);
+              System.out.printf("\n%-10s:%10.2f","Toll",toll);
+              System.out.println("\n-------------------");
+              
+              //calculate total with discount
+              total = ( tripCost + toll - kabDiscount);
+              System.out.printf("\n%-10s:%10.2f\n","Total",total);
+              
+              // add car history and display it in case 3
+              // carHistory = string.format("%7d%17s: charged %5.2 rm; discounted %5.2rm",counter, "car", total,kabDiscount);
+              // counter++;
+              // for(int i = history.length -1; i >=1; i--) {
+              //  history[i] = history[i-1];
+              // history [0] = carHistory;
+              //}
+              // for free rides
+              
+              if (total <= 0) {
+                System.out.printf("\n%-10s:%10.2f\n","Total",0.00);
+                points = 0;
+              }
+            }
+            
+            
+            //if no
+            if (answer =='n') {
+              System.out.printf("\n%-15s:%10.2f","Trip cost", tripCost);
+              System.out.printf("\n%-15s:%10.2f","Toll",toll);
+              System.out.println("\n-------------------");
+              total = tripCost + toll;
+              int carPoints = (int)total * 10;
+              
+              System.out.printf("\n%-15s:%10.2f\n","Total",total);
+              System.out.printf("\n%-11s:%10d\n","Kab Points Earned",carPoints);
+              points = points + carPoints;
+              break;
+              //history 
+              // carHistory = string.format("%7d%17s: charged %5.2 rm; discounted %5.2rm",counter, "car", total,kabDiscount);
+              // counter++;
+              // for(int i = History.length -1; i >=1; i--) {
+              //   history[i] = history[i-1];
+              //  history [0] = carHistory;
+              
+              
+              
+              
+              
+              
+              
+            }
+            break;
+          }
+          
+          
+          
+          
+          //Kab food
+        case 2:
+          System.out.println("===============");
+          System.out.printf("|%10s%4s\n","KAB FOOD","|");
+          System.out.println("===============");
+          double foodPrice, foodDistance, foodTotal;
+          // double foodPoints = 0; //dummy value
+          System.out.println(" Enter Food Price: ");
+          foodPrice = input.nextDouble();
+          System.out.println(" Enter Distance(KM): ");
+          foodDistance = input.nextDouble();
+          if (foodPrice <0 || foodDistance <0) {
+            System.out.println("Invalid");
+            break;
+          }
+          else{ System.out.printf("%-14s:%10.2f","Food Cost", foodPrice);
+            System.out.printf("\n%-14s:%10.2f","distance", foodDistance);
+            double tax = 0.12 * foodPrice;
+            System.out.printf("\n%-14s:%10.2f","Tax ", tax);
+            double deliveryFee =3.75 * foodDistance;
+            System.out.printf("\n%-14s:%10.2f","Delivery Fee ", deliveryFee);
+            System.out.println("\n-------------------------");
+            foodTotal = foodPrice + deliveryFee + tax;
+            System.out.printf("\n%-14s:%10.2f\n","Total ", foodTotal);
+            int foodPoints = (int)foodTotal + 3;
+            System.out.printf("\n%-14s:%10.2s\n","Kab points earned ", foodPoints);
+            points = points + foodPoints;     
+            
+            
+          }
+          
+          continue;
+          
+          
+          
+        case 3 :
+          System.out.println("\n===============");
+          System.out.printf("|%10s%4s\n","KAB INFO","|");
+          System.out.println("===============");
+          // display points
+          System.out.printf("\n%-14s:%10d\n","Total Kab Points ", points);
+          
+          continue;
+        case 4 :
+          System.out.printf("THANK YOU FOR USING KABAPP");
+          return;
+          
+          
+          
+          
+      } 
+      
+      
+    }while(exit);
+    
+  }
+  
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
