@@ -15,4 +15,18 @@ public class TicTacToe {
         System.out.println(board[2][0] + " | " + board[2][1] + " | " + board[2][2]);
         System.out.println(" ");
     }
+
+    public static boolean isvalidMove(char[][] board, int move) {
+        int row = (move - 1) / 3;
+        int col = (move - 1) % 3;
+        if (move < 1 || move > 9) {
+            return false;
+        } else if (board[row][col] == 'X' || board[row][col] == 'O') {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 }
