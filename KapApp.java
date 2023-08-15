@@ -50,9 +50,9 @@ public class KapApp {
         char usePoint = 'N';
         String newHistory = "";
         Scanner input = new Scanner(System.in);
-        System.out.println("|===============|");
-        System.out.println("      KAB APP    ");
-        System.out.println("| ===============");
+        System.out.println("|================|");
+        System.out.println("     KAB CAR      ");
+        System.out.println("|================|");
         System.out.print("Enter distance(km): ");
         distance = input.nextInt();
         System.out.print("Enter toll(rm): ");
@@ -76,7 +76,7 @@ public class KapApp {
 
             else {
                 cost = (float) (6 * Math.sqrt((distance / 2) - 2) + 5) + toll;
-                cost = Math.round(cost * 100) / 100;
+                cost = Math.round(cost * 100) / 100.0f;
                 point = Math.round(cost * 10);
                 newHistory = "Car: charged " + cost + " rm and earned " + point + " Kab points ";
                 addHistory(History, newHistory);
@@ -113,7 +113,7 @@ public class KapApp {
             } else {
                 discount = (int) (point / 100) * 5;
                 cost = (float) (6 * Math.sqrt((distance / 2) - 2) + 5) + toll;
-                cost = Math.round(cost * 100) / 100;
+                cost = Math.round(cost * 100) / 100.0f;
                 point = 0;
 
                 newHistory = "Car: charged " + cost + " rm, discounted " + discount + " rm ";
@@ -135,21 +135,60 @@ public class KapApp {
                     System.out.println("Total      : " + (cost - discount));
                     System.out.println("Kab Points Earned     : " + (point));
                 }
+                addHistory(History, newHistory);
 
             }
         }
-        addHistory(History, newHistory);
 
         return point;
     }
 
     public static int kabFood(String History[]) {
-        System.out.println("working");
+        float foodPrice, foodDistance, deliveryFee = 0;
+        float foodTotal = 0;
+        int foodPoints;
+        float tax;
+        String newHistory = "";
+        Scanner input = new Scanner(System.in);
+        System.out.println("|================|");
+        System.out.println("     KAB FOOD     ");
+        System.out.println("|================|");
+        System.out.print("Enter food price: ");
+        foodPrice = input.nextFloat();
+        System.out.print("Enter distance: ");
+        foodDistance = input.nextFloat();
+        System.out.println("Food Cost: " + foodPrice);
+
+        tax = foodPrice * 0.12f;
+        tax = Math.round(tax * 100) / 100.0f;
+        System.out.println("Tax: " + tax);
+        deliveryFee = 3.75f * foodDistance;
+        System.out.println("Delivery fee: " + deliveryFee);
+        System.out.println("--------------------------------------------------");
+        foodTotal = foodPrice + deliveryFee + tax;
+        System.out.println("Total: " + foodTotal);
+        foodPoints = (int) foodPrice * 3;
+        System.out.println("Kab points earned:" + (int) foodPoints);
+        newHistory = "Food: charged " + foodTotal + " rm, earned " + foodPoints + " kab points ";
+        addHistory(History, newHistory);
+        return foodPoints;
     }
 
     public static void showHistory(String History[]) {
+        int index = 0;
+        System.out.println("Hist #                     Description");
+        System.out.println("----------------------------------------------------");
         for (int i = 0; i < History.length; i++) {
-            System.out.println(History[i]);
+            if (History[i] == null) {
+                break;
+            } else {
+                index = i;
+            }
+        }
+        for (int i = index; i >= 0; i--) {
+            if (History[i] != null) {
+                System.out.println((i + 1) + "          " + History[i]);
+            }
         }
     }
 
